@@ -1,7 +1,5 @@
-'''
 1 --> fazer tela inicial:
 fundo preto com botão de ação para começar o jogo
 
-
-
-'''
+Proximos passos:
+ver com a barbara a questão do fundo da tela do flappy bird
