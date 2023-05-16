@@ -10,6 +10,10 @@ WIDTH = 480 # Largura da tela
 HEIGHT = 600 # Altura da tela
 FPS = 60 # Frames por segundo
 
+# Define tamanhos
+FLAPPY_WIDTH = 113
+FLAPPY_HEIGHT = 42
+
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)

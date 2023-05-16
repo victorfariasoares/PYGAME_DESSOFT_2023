@@ -4,7 +4,7 @@ from config import IMG_DIR, SND_DIR, FNT_DIR
 
 
 BACKGROUND = 'background'
-INSPER_IMG = 'insper_img'
+BIRD_IMG = 'insper_img'
 DIE_SOUND = 'die_sound'
 FLY_SOUND = 'fly_sound'
 
@@ -12,7 +12,7 @@ FLY_SOUND = 'fly_sound'
 def load_assets():
     assets = {}
     assets[BACKGROUND] = pygame.image.load(os.path.join(IMG_DIR, 'background.jpeg')).convert()
-    assets[INSPER_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'insper_logo.png')).convert_alpha()
+    assets[BIRD_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'insper_logo.png')).convert_alpha()
 
     for i in range(9):
         # Os arquivos de animação são numerados de 00 a 08

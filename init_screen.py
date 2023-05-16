@@ -8,6 +8,10 @@ pygame.init()
 # ----- Gera tela principal
 
 def init_screen(screen):
+    # Carrega o fundo da tela inicial
+    background = pygame.image.load(path.join(IMG_DIR, 'background.jpeg')).convert()
+    background_rect = background.get_rect()
+
     # Carrega o flappy
     flappy = pygame.image.load(path.join(IMG_DIR, 'insper_logo.png')).convert_alpha()
 
@@ -59,7 +63,8 @@ def init_screen(screen):
                 running = False
 
         # ----- Gera saídas
-        screen.fill((BLACK))  # Preenche com a cor branca
+        screen.fill((BLACK))  # Preenche com a cor preta
+        screen.blit(background, background_rect)
         screen.blit(text_intro, (centro_text_intro, 20))
         screen.blit(text_descrip, (centro_text_descrip, 85))
         screen.blit(flappy, (centro_flappy, 200))
