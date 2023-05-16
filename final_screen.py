@@ -10,17 +10,17 @@ window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Flappy')
 
 # Carrega o fundo da tela inicial
-background = pygame.image.load(path.join(IMG_DIR, 'img_final_screen.jpg')).convert()
+background = pygame.image.load(path.join(IMG_DIR, 'img_final_screen_game_over.jpg')).convert()
 background_rect = background.get_rect()
 
-# Carrega o flappy
-flappy = pygame.image.load(path.join(IMG_DIR, 'insper_logo.png')).convert_alpha()
+# Carrega o yes
+yes_button = pygame.image.load(path.join(IMG_DIR, 'final_screen_yes_button')).convert_alpha()
 
 # Carrega o botão de start
-start_bottom = pygame.image.load(path.join(IMG_DIR, 'start.png')).convert()
+no_button = pygame.image.load(path.join(IMG_DIR, 'final_screen_no_button')).convert()
 
 background = pygame.transform.scale(background, (480, 600))
-start_button = pygame.transform.scale(start_bottom, (40, 40))
+start_button = pygame.transform.scale(no_button, (40, 40))
 
 # ----- Inicia assets-------
 tamanho_fonte_1 = 70
@@ -38,11 +38,11 @@ text_intro_width = text_intro.get_width()
 text_intro_height = text_intro.get_height()
 centro_text_intro = WIDTH // 2 - text_intro_width // 2
 
-flappy_width = flappy.get_width()
+flappy_width = yes_button.get_width()
 centro_flappy = WIDTH // 2 - flappy_width // 2
 
-start_bottom_width = start_bottom.get_width()
-start_bottom_height = start_bottom.get_height()
+start_bottom_width = no_button.get_width()
+start_bottom_height = no_button.get_height()
 centro_start = WIDTH // 2 - start_bottom_width // 2
 
 text_descrip_width = text_descrip.get_width()
@@ -72,8 +72,8 @@ while running:
     window.blit(background, background_rect)
     window.blit(text_intro, (centro_text_intro, 20))
     window.blit(text_descrip, (centro_text_descrip, 85))
-    window.blit(flappy, (centro_flappy, 200))
-    window.blit(start_bottom, (centro_start, 450))
+    window.blit(yes_button, (centro_flappy, 200))
+    window.blit(no_button, (centro_start, 450))
 
     pygame.display.flip()
 
