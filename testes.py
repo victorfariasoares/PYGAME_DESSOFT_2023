@@ -17,8 +17,8 @@ while state != QUIT:
         state = init_screen(window)
         status_mouse = pygame.mouse.get_pressed()
         posicao_mouse = pygame.mouse.get_pos()
-        print(posicao_mouse)
-        print(status_mouse)
+    print(posicao_mouse)
+    print(status_mouse)
 
 
 
