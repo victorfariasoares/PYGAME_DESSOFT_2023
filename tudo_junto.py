@@ -124,8 +124,10 @@ def game_screen(window):
                     # Dependendo da tecla, ele voa.
                     #keys_down[event.key] = True
                     if event.key == pygame.K_SPACE:
-                        #player.rect.y = 0
+                        player.rect.y = 0
                         player.rect.y -= 12
+                        pygame.mixer.Sound('assets/snd/fly_sound.wav').play()
+
 
         # ----- Atualiza estado do jogo
         # Atualizando a posição dos meteoros
@@ -136,9 +138,6 @@ def game_screen(window):
         window.blit(assets['background'], (0, 0))
         # Desenhando jogador
         all_sprites.draw(window)
-
-        posicao_mouse = pygame.mouse.get_pos()
-        print(posicao_mouse)
 
         pygame.display.update()  # Mostra o novo frame para o jogador
 
