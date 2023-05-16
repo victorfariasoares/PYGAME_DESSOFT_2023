@@ -19,6 +19,9 @@ flappy = pygame.image.load(path.join(IMG_DIR, 'insper_logo.png')).convert_alpha(
 # Carrega o botão de start
 start_bottom = pygame.image.load(path.join(IMG_DIR, 'start.png')).convert()
 
+background = pygame.transform.scale(background, (480, 600))
+start_button = pygame.transform.scale(start_bottom, (40, 40))
+
 # ----- Inicia assets-------
 tamanho_fonte_1 = 70
 font_1 = pygame.font.SysFont(None, tamanho_fonte_1)
