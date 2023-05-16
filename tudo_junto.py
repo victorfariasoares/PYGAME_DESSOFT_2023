@@ -46,13 +46,27 @@ class Bird(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.centerx = 40
         self.rect.bottom = HEIGHT / 2
-        self.speedy = 3
+        self.speedy = 1
+        self.click = -12
         self.groups = groups
         self.assets = assets
+        self.flap = False
+        self.can_flap = True
 
     def update(self):
-        # Atualização da posição do bird
-        self.rect.y += 2 * self.speedy
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            self.speedy = 0  # Define a velocidade vertical como 0
+        else:
+            self.speedy = 1  # Define a velocidade vertical normal
+
+         # Atualização da posição do bird
+        if self.flap and self.can_flap:
+            self.rect.y += self.click
+            self.flap = False
+            self.can_flap = False  # redefine can_flap como False para evitar múltiplos flaps
+        else:
+            self.rect.y += self.speedy
 
         # Mantem dentro da tela
         if self.rect.top <= 0:
@@ -124,8 +138,7 @@ def game_screen(window):
                     # Dependendo da tecla, ele voa.
                     #keys_down[event.key] = True
                     if event.key == pygame.K_SPACE:
-                        player.rect.y = 0
-                        player.rect.y -= 12
+                        
                         pygame.mixer.Sound('assets/snd/fly_sound.wav').play()
 
 
