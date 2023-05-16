@@ -8,11 +8,11 @@ FNT_DIR = path.join(path.dirname(__file__), 'assets', 'font')
 # Dados gerais do jogo.
 WIDTH = 480 # Largura da tela
 HEIGHT = 600 # Altura da tela
-FPS = 60 # Frames por segundo
+FPS = 120 # Frames por segundo
 
 # Define tamanhos
-FLAPPY_WIDTH = 113
-FLAPPY_HEIGHT = 42
+FLAPPY_WIDTH = 111 / 2
+FLAPPY_HEIGHT = 134 / 2
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
