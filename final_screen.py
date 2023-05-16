@@ -14,10 +14,10 @@ background = pygame.image.load(path.join(IMG_DIR, 'img_final_screen_game_over.jp
 background_rect = background.get_rect()
 
 # Carrega o yes
-yes_button = pygame.image.load(path.join(IMG_DIR, 'final_screen_yes_button')).convert_alpha()
+yes_button = pygame.image.load(path.join(IMG_DIR, 'final_screen_yes_button.jpg')).convert_alpha()
 
 # Carrega o botão de start
-no_button = pygame.image.load(path.join(IMG_DIR, 'final_screen_no_button')).convert()
+no_button = pygame.image.load(path.join(IMG_DIR, 'final_screen_no_button.jpg')).convert()
 
 background = pygame.transform.scale(background, (480, 600))
 start_button = pygame.transform.scale(no_button, (40, 40))
