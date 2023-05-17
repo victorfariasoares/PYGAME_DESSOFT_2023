@@ -24,7 +24,8 @@ start_button = pygame.transform.scale(no_button, (40, 40))
 
 # ----- Inicia assets-------
 tamanho_fonte_1 = 70
-font_1 = pygame.font.SysFont(None, tamanho_fonte_1)
+nome_fonte = 'PressStart'
+font_1 = pygame.font.SysFont(nome_fonte, tamanho_fonte_1)
 frase_1 = 'FLAPPY INSPER'
 text_intro = font_1.render(frase_1, True, (RED))
 
