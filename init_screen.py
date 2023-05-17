@@ -62,6 +62,12 @@ def init_screen(screen):
                 state = GAME
                 running = False
 
+        #Para a tela final
+        if status_mouse: 
+            if posicao_mouse in range((100,0), (200,0)) and posicao_mouse in range((0,100), (0,200)): 
+                #trocar posicao mouse por posicao_mouse[0] (para x) e posicao_mouse[1] (para y)
+                
+
         # ----- Gera saídas
         screen.fill((BLACK))  # Preenche com a cor preta
         screen.blit(background, background_rect)
