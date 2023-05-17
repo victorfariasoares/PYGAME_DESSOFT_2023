@@ -20,6 +20,7 @@ height_space = 227
 
 # -------- alturas dos obstaculos
 obstacles = [0, -27, -77, -177]
+obstacles_inverts = [411, 465, 520, 600]
 
 # ----- Inicia assets
 FPS = 120
@@ -69,7 +70,7 @@ class Bird(pygame.sprite.Sprite):
             self.rect.bottom = floor_y_pos
 
 class Floor(pygame.sprite.Sprite):
-    def __init__(self, groups, assets):
+    def __init__(self, groups, assets, x):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
@@ -78,6 +79,7 @@ class Floor(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.left = floor_x_pos
         self.rect.y = floor_y_pos
+        self.rect.x = x
         self.speedx = -1
         self.groups = groups
         self.assets = assets
@@ -87,8 +89,8 @@ class Floor(pygame.sprite.Sprite):
         self.rect.x += self.speedx
 
         # fica em um loop para manter o moviento
-        if self.rect.right <= WIDTH:
-            self.rect.right = WIDTH + 172
+        #if self.rect.right <= WIDTH:
+        #   self.rect.right = WIDTH + 172
 
 class Obstacle_1(pygame.sprite.Sprite):
     def __init__(self, groups, assets):
@@ -98,10 +100,8 @@ class Obstacle_1(pygame.sprite.Sprite):
         self.image = assets['obstaculo']
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.y = -177
-        self.rect.x = 450
-
-        z = height_space - self.rect.y
+        self.rect.y = 0
+        self.rect.x = 500
 
         self.speedx = -1
 
@@ -114,7 +114,7 @@ class Obstacle_1(pygame.sprite.Sprite):
 
         # Quando o obstáculo passar do começo da tela, cria um novo
         if self.rect.right <= 0:
-            self.rect.x = 450
+            self.rect.x = 500
             self.rect.y = random.choice(obstacles)
 
 class Obstacle_1_invert(pygame.sprite.Sprite):
@@ -122,18 +122,11 @@ class Obstacle_1_invert(pygame.sprite.Sprite):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
-        self.imagem_invertida = assets['obstaculo_invert']
-        self.mask = pygame.mask.from_surface(self.imagem_invertida)
-        self.rect_invertida = self.imagem_invertida.get_rect()
-        self.rect_invertida.y = 0
-        self.rect_invertida.x = 450
-        z = height_space - self.rect_invertida.y
-
-        self.image = assets['obstaculo']
+        self.image = assets['obstaculo_invert']
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.y = floor_y_pos - z + obstacle_space
-        self.rect.x = 450
+        self.rect.y = 411
+        self.rect.x = 500
 
         self.speedx = -1
 
@@ -142,17 +135,17 @@ class Obstacle_1_invert(pygame.sprite.Sprite):
 
     def update(self):
         # Atualizando a posição do obstáculo
-        self.rect_invertida.x += self.speedx
         self.rect.x += self.speedx
 
         # Quando o obstáculo passar do começo da tela, cria um novo
         if self.rect.right <= 0:
-            self.rect.x = 450
+            self.rect.x = 500
+            self.rect.y = random.choice(obstacles_inverts)
 
-#class Obstacle_2(pygame.sprite.Sprite):
-
-
-#class Obstacle_3(pygame.sprite.Sprite):
+class DESOFT(pygame.sprite.Sprite):
+    def __init__(self, groups, assets):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
 
 
 
@@ -174,14 +167,22 @@ def game_screen(window):
     player = Bird(groups, assets)
     all_sprites.add(player)
 
-    # Criando o piso
-    floor = Floor(groups, assets)
-    all_sprites.add(floor)
-
     # Criando os obstáculos
     obst = Obstacle_1(groups, assets)
     all_sprites.add(obst)
     all_obstacles.add(obst)
+
+    obst_inverts = Obstacle_1_invert(groups, assets)
+    all_sprites.add(obst_inverts)
+    all_obstacles.add(obst_inverts)
+
+    # Criando o piso
+    floor = Floor(groups, assets, 0)
+    all_sprites.add(floor)
+
+    next_floor = Floor(groups, assets, floor.rect.right)
+    all_sprites.add(next_floor)
+
 
     DONE = 0
     PLAYING = 1
@@ -191,18 +192,27 @@ def game_screen(window):
 
     keys_down = {}
 
-    generate_places = True
-    y_positions = []
+    start_time = pygame.time.get_ticks()
+    speed_increase_time = 10000
 
     # ===== Loop principal =====
     #pygame.mixer.music.play(loops=-1)
     while state != DONE:
         clock.tick(FPS)
 
-        if generate_places:
-            for i in range(len(obstacles)):
-                y_positions.append(random.randint(0, 500))
-            generate_places = False
+        '''if floor.rect.right <= WIDTH:
+            floor = next_floor
+            next_floor = Floor(groups, assets, floor.rect.right)
+            all_sprites.add(next_floor)'''
+
+
+        current_time = pygame.time.get_ticks()
+        if current_time - start_time >= speed_increase_time:
+            # Aumente a velocidade aqui
+            start_time = current_time
+            obst.speedx -= 1
+            obst_inverts.speedx -= 1
+            floor.speedx -= 1
 
         # ----- Trata eventos
         for event in pygame.event.get():
