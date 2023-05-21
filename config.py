@@ -6,13 +6,23 @@ SND_DIR = path.join(path.dirname(__file__), 'assets', 'snd')
 FNT_DIR = path.join(path.dirname(__file__), 'assets', 'font')
 
 # Dados gerais do jogo.
-WIDTH = 480 # Largura da tela
-HEIGHT = 600 # Altura da tela
+WIDTH = 500 # Largura da tela
+HEIGHT = 750 # Altura da tela
 FPS = 120 # Frames por segundo
 
 # Define tamanhos
 FLAPPY_WIDTH = 111 / 2
 FLAPPY_HEIGHT = 134 / 2
+
+# -------- alturas dos obstaculos
+OBSTACLES = [0, -27, -77, -177]
+OBSTACLES_INVERTS = [411, 438, 488, 588]
+
+# ------- posição do chão
+floor_x_pos = 0
+floor_y_pos = 638
+obstacle_space = 184
+height_space = 227
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
