@@ -83,7 +83,7 @@ def game_screen(window):
             floor.speedx -= 1
             semestre += 1
 
-            if semestre == 3:
+            if semestre == 11:
                 state = CONCLUDE
                 runing = False
 
