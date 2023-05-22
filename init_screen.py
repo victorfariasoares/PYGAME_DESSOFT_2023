@@ -50,14 +50,13 @@ def init_screen(screen):
         for event in pygame.event.get():
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
-                state = QUIT
-                running = False
+                pygame.quit()
 
         # verifica se o jogador começou o jogo
         status_mouse = pygame.mouse.get_pressed()
         posicao_mouse = pygame.mouse.get_pos()
 
-        if status_mouse != (False, False, False):
+        if status_mouse == (True, False, False):
             if posicao_mouse[0] <= (centro_start + start_bottom_width) and posicao_mouse[0] >= centro_start and posicao_mouse[1] >= 450 and posicao_mouse[1] <= (start_bottom_height + 450):
                 state = GAME
                 running = False

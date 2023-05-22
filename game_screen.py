@@ -1,7 +1,7 @@
 import pygame
 import random
 import time
-from config import FPS, WIDTH, YELLOW, OBSTACLES, OBSTACLES_INVERTS
+from config import FPS, WIDTH, HEIGHT, YELLOW, OBSTACLES, OBSTACLES_INVERTS, WHITE, RED, QUIT, DONE, PLAYING
 from assets import load_assets, FLY_SOUND, DIE_SOUND, BACKGROUND, SCORE_FONT
 from sprites import Bird, Obstacle_1, Floor
 
@@ -52,21 +52,21 @@ def game_screen(window):
     floor = Floor(assets, 0)
     all_sprites.add(floor)
 
-    DONE = 0
-    PLAYING = 1
-    state = PLAYING
-
     can_flap = True
 
     score = 0
     max_score = score
 
+    state = PLAYING
+
     start_time = pygame.time.get_ticks()
     speed_increase_time = 10000
 
+    lives = 0
 
     # ===== Loop principal =====
     pygame.mixer.music.play(loops=-1)
+
     while state != DONE:
         clock.tick(FPS)
 
@@ -105,7 +105,7 @@ def game_screen(window):
         for event in pygame.event.get():
             # ----- Verifica consequências
             if event.type == pygame.QUIT:
-                state = DONE
+                pygame.quit()
             # Só verifica o teclado se está no estado de jogo
             if state == PLAYING:
                 # Verifica se apertou alguma tecla.
@@ -133,13 +133,19 @@ def game_screen(window):
 
         if state == PLAYING:
             # Verifica se houve colisão entre flappy e obstáculo
-            hits = pygame.sprite.spritecollide(player, all_obstacles, True, pygame.sprite.collide_mask)
+            hits = pygame.sprite.spritecollide(player, all_obstacles, False, pygame.sprite.collide_mask)
             if len(hits) > 0:
                 assets[DIE_SOUND].play()
                 player.speedy = 0
                 player.kill()
-                time.sleep(0.5)
-                state = DONE
+                lives += 1
+                time.sleep(0.3)
+
+                if lives == 4:
+                    state = DONE
+                else:
+                    player = Bird(groups, assets)
+                    all_sprites.add(player)
 
         # ----- Gera saídas
         window.fill((0, 0, 0))  # Preenche com a cor branca
@@ -148,9 +154,17 @@ def game_screen(window):
         all_sprites.draw(window)
 
         # Desenhando o score
-        text_surface = assets[SCORE_FONT].render("{:08d}".format(score), True, YELLOW)
+        text_surface = assets[SCORE_FONT].render('{:08d}'.format(score), True, WHITE)
         text_rect = text_surface.get_rect()
         text_rect.midtop = (WIDTH / 2,  10)
         window.blit(text_surface, text_rect)
 
+        # Desenhando as vidas
+        text_surface = assets[SCORE_FONT].render(f'você está na DP {lives}', True, RED)
+        text_rect = text_surface.get_rect()
+        text_rect.bottomleft = (10, HEIGHT - 10)
+        window.blit(text_surface, text_rect)
+
         pygame.display.update()  # Mostra o novo frame para o jogador
+
+    return state

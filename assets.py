@@ -13,6 +13,7 @@ OBSTACLE_INVERT = 'obstaculo_invert'
 SCORE_FONT = 'score_font'
 GAME_OVER_FONT = 'game_over_font'
 YES_FONT = 'yes_font'
+RETURN = 'return'
 
 def load_assets():
     assets = {}
@@ -26,6 +27,7 @@ def load_assets():
     assets[SCORE_FONT] = pygame.font.Font(os.path.join(FNT_DIR, 'prstartk.ttf'), 28)
     assets[GAME_OVER_FONT] = pygame.font.Font(os.path.join(FNT_DIR, 'prstartk.ttf'), 56)
     assets[YES_FONT] = pygame.font.Font(os.path.join(FNT_DIR, 'prstartk.ttf'), 35)
+    assets[RETURN] = pygame.font.Font(os.path.join(FNT_DIR, 'prstartk.ttf'), 25)
 
     # Carrega os sons do jogo
     pygame.mixer.music.load(os.path.join(SND_DIR, 'game_sound.wav'))
