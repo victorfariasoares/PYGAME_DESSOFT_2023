@@ -54,8 +54,7 @@ def game_screen(window):
 
     can_flap = True
 
-    score = 0
-    max_score = score
+    semestre = 1
 
     state = PLAYING
 
@@ -81,6 +80,7 @@ def game_screen(window):
             obst_final.speedx -= 1
             obst_final_inverts.speedx -= 1
             floor.speedx -= 1
+            semestre += 1
 
         # reposiciona os obstaculos
         if obst.rect.right < 0:
@@ -125,12 +125,6 @@ def game_screen(window):
         # Atualizando a posição dos sprites
         all_sprites.update()
 
-        if obst.rect.x or obst_meiuca.rect.x or obst_final.rect.x == player.rect.x:
-            score += 1
-
-        if score > max_score:
-            max_score = score
-
         if state == PLAYING:
             # Verifica se houve colisão entre flappy e obstáculo
             hits = pygame.sprite.spritecollide(player, all_obstacles, False, pygame.sprite.collide_mask)
@@ -154,7 +148,7 @@ def game_screen(window):
         all_sprites.draw(window)
 
         # Desenhando o score
-        text_surface = assets[SCORE_FONT].render('{:08d}'.format(score), True, WHITE)
+        text_surface = assets[SCORE_FONT].render(f'semestre: {semestre}', True, WHITE)
         text_rect = text_surface.get_rect()
         text_rect.midtop = (WIDTH / 2,  10)
         window.blit(text_surface, text_rect)
