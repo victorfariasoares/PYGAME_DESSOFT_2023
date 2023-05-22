@@ -15,6 +15,7 @@ GAME_OVER_FONT = 'game_over_font'
 YES_FONT = 'yes_font'
 RETURN = 'return'
 
+
 def load_assets():
     assets = {}
     assets[BACKGROUND] = pygame.image.load(os.path.join(IMG_DIR, 'background.jpeg')).convert()

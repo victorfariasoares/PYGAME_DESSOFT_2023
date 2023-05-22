@@ -1,7 +1,7 @@
 import pygame
 import random
 import time
-from config import FPS, WIDTH, HEIGHT, YELLOW, OBSTACLES, OBSTACLES_INVERTS, WHITE, RED, QUIT, DONE, PLAYING
+from config import FPS, WIDTH, HEIGHT, YELLOW, OBSTACLES, OBSTACLES_INVERTS, WHITE, RED, QUIT, DONE, PLAYING, TRY
 from assets import load_assets, FLY_SOUND, DIE_SOUND, BACKGROUND, SCORE_FONT
 from sprites import Bird, Obstacle_1, Floor
 
@@ -136,10 +136,13 @@ def game_screen(window):
                 time.sleep(0.3)
 
                 if lives == 4:
-                    state = DONE
+                    state = TRY
                 else:
                     player = Bird(groups, assets)
                     all_sprites.add(player)
+
+        if semestre == 11:
+            state = DONE
 
         # ----- Gera saídas
         window.fill((0, 0, 0))  # Preenche com a cor branca

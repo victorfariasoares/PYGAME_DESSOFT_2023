@@ -38,3 +38,4 @@ GAME = 1
 QUIT = 2
 DONE = 3
 PLAYING = 4
+TRY = 5
