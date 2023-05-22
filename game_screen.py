@@ -113,7 +113,7 @@ def game_screen(window):
                     # Dependendo da tecla, ele voa.
                     #keys_down[event.key] = True
                     if event.key == pygame.K_SPACE and can_flap:
-                        player.rect.y -= 45
+                        player.rect.y -= 55
                         can_flap = False
                         assets[FLY_SOUND].play()
 
