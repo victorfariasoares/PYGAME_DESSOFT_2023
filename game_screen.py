@@ -1,7 +1,7 @@
 import pygame
 import random
 import time
-from config import FPS, WIDTH, HEIGHT, YELLOW, OBSTACLES, OBSTACLES_INVERTS, WHITE, RED, QUIT, DONE, PLAYING, TRY
+from config import FPS, WIDTH, HEIGHT, YELLOW, OBSTACLES, OBSTACLES_INVERTS, WHITE, RED, DONE, PLAYING, CONCLUDE
 from assets import load_assets, FLY_SOUND, DIE_SOUND, BACKGROUND, SCORE_FONT
 from sprites import Bird, Obstacle_1, Floor
 
@@ -66,7 +66,8 @@ def game_screen(window):
     # ===== Loop principal =====
     pygame.mixer.music.play(loops=-1)
 
-    while state != DONE:
+    runing = True
+    while runing:
         clock.tick(FPS)
 
         current_time = pygame.time.get_ticks()
@@ -81,6 +82,10 @@ def game_screen(window):
             obst_final_inverts.speedx -= 1
             floor.speedx -= 1
             semestre += 1
+
+            if semestre == 3:
+                state = CONCLUDE
+                runing = False
 
         # reposiciona os obstaculos
         if obst.rect.right < 0:
@@ -136,13 +141,11 @@ def game_screen(window):
                 time.sleep(0.3)
 
                 if lives == 4:
-                    state = TRY
+                    state = DONE
+                    runing = False
                 else:
                     player = Bird(groups, assets)
                     all_sprites.add(player)
-
-        if semestre == 11:
-            state = DONE
 
         # ----- Gera saídas
         window.fill((0, 0, 0))  # Preenche com a cor branca
