@@ -4,6 +4,7 @@ from config import IMG_DIR, SND_DIR, FNT_DIR, FLAPPY_WIDTH, FLAPPY_HEIGHT
 
 
 BACKGROUND = 'background'
+INICIAL_SCREEN = 'inicial screen'
 BIRD_IMG = 'bird_img'
 DIE_SOUND = 'die_sound'
 FLOOR = 'floor'
@@ -19,6 +20,7 @@ RETURN = 'return'
 def load_assets():
     assets = {}
     assets[BACKGROUND] = pygame.image.load(os.path.join(IMG_DIR, 'background.jpeg')).convert()
+    assets[INICIAL_SCREEN] = pygame.image.load(os.path.join(IMG_DIR, 'foto_inicial.png')).convert()
     assets[FLOOR] = pygame.image.load(os.path.join(IMG_DIR, 'floor.png')).convert()
     assets[FLOOR] = pygame.transform.scale2x(assets['floor'])
     assets[BIRD_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'bird.png')).convert_alpha()

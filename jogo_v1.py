@@ -5,7 +5,6 @@ from game_screen import game_screen
 from final_screen import finish_screen
 from parabens_screen import parabens_screen
 
-
 pygame.init()
 pygame.mixer.init()
 
