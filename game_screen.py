@@ -166,5 +166,7 @@ def game_screen(window):
         window.blit(text_surface, text_rect)
 
         pygame.display.update()  # Mostra o novo frame para o jogador
-
+    
+    with open('score.txt', 'w') as arquivo:
+        arquivo.write(f'Você chegou até o {semestre} semestre\n')
     return state
